@@ -71,18 +71,18 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\F2xGP_Template\glm-0.9.9-a2\;D:\F2xGP_Template\glew-2.1.0\include;D:\F2xGP_Template\glfw-3.2.1.bin.WIN32\include;$(IncludePath)</IncludePath>
-    <ReferencePath>D:\F2xGP_Template\glew-2.1.0\bin\Release\Win32;D:\F2xGP_Template\glfw-3.2.1.bin.WIN32\lib-vc2015;$(ReferencePath)</ReferencePath>
-    <LibraryPath>D:\F2xGP_Template\glew-2.1.0\lib\Release\Win32;D:\F2xGP_Template\glfw-3.2.1.bin.WIN32\lib-vc2015;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\GPGameTemplate-master\glm-0.9.9-a2\;D:\GPGameTemplate-master\glew-2.1.0\include;D:\GPGameTemplate-master\glfw-3.2.1.bin.WIN32\include;$(IncludePath)</IncludePath>
+    <ReferencePath>D:\GPGameTemplate-master\glew-2.1.0\bin\Release\Win32;D:\GPGameTemplate-master\glfw-3.2.1.bin.WIN32\lib-vc2015;$(ReferencePath)</ReferencePath>
+    <LibraryPath>D:\GPGameTemplate-master\glew-2.1.0\lib\Release\Win32;D:\GPGameTemplate-master\glfw-3.2.1.bin.WIN32\lib-vc2015;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>D:\F2xGP_Template\glm-0.9.9-a2\;D:\F2xGP_Template\glew-2.1.0\include;D:\F2xGP_Template\glfw-3.2.1.bin.WIN32\include;$(IncludePath)</IncludePath>
-    <ReferencePath>D:\F2xGP_Template\glew-2.1.0\bin\Release\Win32;D:\F2xGP_Template\glfw-3.2.1.bin.WIN32\lib-vc2015;$(ReferencePath)</ReferencePath>
-    <LibraryPath>D:\F2xGP_Template\glew-2.1.0\lib\Release\Win32;D:\F2xGP_Template\glfw-3.2.1.bin.WIN32\lib-vc2015;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\GPGameTemplate-master\glm-0.9.9-a2\;D:\GPGameTemplate-master\glew-2.1.0\include;D:\GPGameTemplate-master\glfw-3.2.1.bin.WIN32\include;$(IncludePath)</IncludePath>
+    <ReferencePath>D:\GPGameTemplate-master\glew-2.1.0\bin\Release\Win32;D:\GPGameTemplate-master\glfw-3.2.1.bin.WIN32\lib-vc2015;$(ReferencePath)</ReferencePath>
+    <LibraryPath>D:\GPGameTemplate-master\glew-2.1.0\lib\Release\Win32;D:\GPGameTemplate-master\glfw-3.2.1.bin.WIN32\lib-vc2015;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -94,13 +94,14 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\F2xGP_Template\glew-2.1.0\include;D:\F2xGP_Template\glfw-3.2.1.bin.WIN32\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GPGameTemplate-master\glew-2.1.0\include;D:\GPGameTemplate-master\glfw-3.2.1.bin.WIN32\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\F2xGP_Template\glew-2.1.0\lib\Release\Win32;D:\F2xGP_Template\glfw-3.2.1.bin.WIN32\lib-vc2015;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>D:\GPGameTemplate-master\glew-2.1.0\lib\Release\Win32;D:\GPGameTemplate-master\glfw-3.2.1.bin.WIN32\lib-vc2015;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;glew32.lib;glew32s.lib;glfw3.lib;glfw3dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/NODEFAULTLIB:MSVCRT.lib %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -125,14 +126,14 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\F2xGP_Template\glew-2.1.0\include;D:\F2xGP_Template\glfw-3.2.1.bin.WIN32\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GPGameTemplate-master\glew-2.1.0\include;D:\GPGameTemplate-master\glfw-3.2.1.bin.WIN32\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\F2xGP_Template\glew-2.1.0\lib\Release\Win32;D:\F2xGP_Template\glfw-3.2.1.bin.WIN32\lib-vc2015;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>D:\GPGameTemplate-master\glew-2.1.0\lib\Release\Win32;D:\GPGameTemplate-master\glfw-3.2.1.bin.WIN32\lib-vc2015;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;glew32.lib;glew32s.lib;glfw3.lib;glfw3dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
