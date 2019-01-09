@@ -27,7 +27,7 @@ int Graphics::Init() {
 	hintsGLFW();								// Setup glfw with various hints.		
 
 												// Start a window using GLFW
-	string title = "My OpenGL Application";
+	string title = "GPGame_Template 2019 - HWU";
 	window = glfwCreateWindow(windowWidth, windowHeight, title.c_str(), NULL, NULL);
 	if (!window) {								// Window or OpenGL context creation failed
 		cout << "Could not initialise GLFW...";
@@ -46,7 +46,7 @@ int Graphics::Init() {
 		return 1;
 	}
 
-	//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);	// Set mouse cursor FPS.
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);	// Set mouse cursor FPS.
 
 	SetupRender();
 
@@ -84,14 +84,31 @@ void Graphics::SetOptimisations() {
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
+
+	// Enable blending
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	
+	
 }
 
 void Graphics::ClearViewport() {
 	glViewport(0, 0, windowWidth, windowHeight);
-	static const GLfloat silver[] = { 0.9f, 0.9f, 0.9f, 1.0f };
-	glClearBufferfv(GL_COLOR, 0, silver);
-	static const GLfloat one = 1.0f;
+	glClearBufferfv(GL_COLOR, 0, &backgroundColor[0]);
+	const GLfloat one = 1.0f;
 	glClearBufferfv(GL_DEPTH, 0, &one);
 }
 
+void Graphics::ToggleMouse() {
+	if (showingMouse) {
+		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);	// Set mouse cursor FPS.
+		cout << "Hidding Mouse..." << "\n";
+	}
+	else {
+		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);		// Set mouse cursor normal
+		cout << "Showing Mouse..." << "\n";
+	}
+
+	showingMouse = !showingMouse; // toggle
+}
 

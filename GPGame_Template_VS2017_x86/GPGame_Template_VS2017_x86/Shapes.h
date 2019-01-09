@@ -29,9 +29,9 @@ public:
 	glm::mat4		proj_matrix = glm::mat4(1.0f);
 	glm::mat4		mv_matrix = glm::mat4(1.0f);
 
-	glm::vec4 fillColor = glm::vec4(1.0, 0.0, 0.0, 1.0);
-	glm::vec4 lineColor = glm::vec4(0.0, 0.0, 0.0, 1.0);
-	float lineWidth = 2.0f;
+	glm::vec4		fillColor = glm::vec4(1.0, 0.0, 0.0, 1.0);
+	glm::vec4		lineColor = glm::vec4(0.0, 0.0, 0.0, 1.0);
+	float			lineWidth = 2.0f;
 
 protected:
 	string rawData;			// Import obj file from Blender (note: no textures or UVs).
@@ -54,4 +54,16 @@ class Arrow : public Shapes {
 public:
 	Arrow();
 	~Arrow();
+};
+
+class Cylinder : public Shapes {
+public:
+	Cylinder();
+	~Cylinder();
+};
+
+class Line : public Shapes {
+public:
+	Line();
+	~Line();
 };

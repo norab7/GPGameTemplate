@@ -9,21 +9,21 @@
 
 // Suggestions or extra help please do email me at S.Padilla@hw.ac.uk
 
-
+// Standard C++ libraries
 #include <iostream>
 #include <vector>
 using namespace std;
 
+// Helper graphic libraries
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/transform.hpp>
-
 #include "graphics.h"
 #include "shapes.h"
 
-// FUNCTIONS
+// MAIN FUNCTIONS
 void startup();
 void updateCamera();
 void updateSceneElements();
@@ -42,16 +42,21 @@ float		deltaTime = 0.0f;	// Keep track of time per frame.
 float		lastTime = 0.0f;	// variable to keep overall time.
 bool		keyStatus[1024];	// Hold key status.
 
+// MAIN GRAPHICS OBJECT
 Graphics	myGraphics;		// Runing all the graphics in this object
 
+// DEMO OBJECTS
 Cube		myCube;
 Sphere		mySphere;
 Arrow		arrowX;
 Arrow		arrowY;
 Arrow		arrowZ;
+Cube		myFloor;
+Line		myLine;
+Cylinder	myCylinder;
 
+// Some global variable to do the animation.
 float t = 0.001f;			// Global variable for animation
-
 
 
 int main()
@@ -63,7 +68,7 @@ int main()
 
 
 
-																			// MAIN LOOP run until the window is closed
+	// MAIN LOOP run until the window is closed
 	while (!quit){
 
 		// Update the camera tranform based on interactive inputs or by following a predifined path.
@@ -79,6 +84,8 @@ int main()
 		glfwSwapBuffers(myGraphics.window);		// swap buffers (avoid flickering and tearing)
 	
 	} 
+
+
 	myGraphics.endProgram();			// Close and clean everything up...
 
 	cout << "\nPress any key to continue...\n";
@@ -88,12 +95,13 @@ int main()
 }
 
 void startup() {
-
+	// Keep track of the running time
 	GLfloat currentTime = (GLfloat)glfwGetTime();	// retrieve timelapse
 	deltaTime = currentTime;						// start delta time
 	lastTime = currentTime;							// Save for next frame calculations.
 
 	// Callback graphics and key update functions - declared in main to avoid scoping complexity.
+	// More information here : https://www.glfw.org/docs/latest/input_guide.html
 	glfwSetWindowSizeCallback(myGraphics.window, onResizeCallback);			// Set callback for resize
 	glfwSetKeyCallback(myGraphics.window, onKeyCallback);					// Set Callback for keys
 	glfwSetMouseButtonCallback(myGraphics.window, onMouseButtonCallback);	// Set callback for mouse click
@@ -104,7 +112,7 @@ void startup() {
 	myGraphics.aspect = (float)myGraphics.windowWidth / (float)myGraphics.windowHeight;
 	myGraphics.proj_matrix = glm::perspective(glm::radians(50.0f), myGraphics.aspect, 0.1f, 1000.0f);
 
-	// Load Geometry
+	// Load Geometry examples
 	myCube.Load();
 
 	mySphere.Load();
@@ -115,25 +123,44 @@ void startup() {
 	arrowY.fillColor = glm::vec4(0.0f, 1.0f, 0.0f, 1.0f); arrowY.lineColor = glm::vec4(0.0f, 1.0f, 0.0f, 1.0f);
 	arrowZ.fillColor = glm::vec4(0.0f, 0.0f, 1.0f, 1.0f); arrowZ.lineColor = glm::vec4(0.0f, 0.0f, 1.0f, 1.0f);
 
+	myFloor.Load();
+	myFloor.fillColor = glm::vec4(130.0f / 255.0f, 96.0f / 255.0f, 61.0f / 255.0f, 1.0f);	// Sand Colour
+	myFloor.lineColor = glm::vec4(130.0f / 255.0f, 96.0f / 255.0f, 61.0f / 255.0f, 1.0f);	// Sand again
+
+	myCylinder.Load();
+	myCylinder.fillColor = glm::vec4(0.7f, 0.7f, 0.7f, 1.0f);
+	myCylinder.lineColor = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+
+	myLine.Load();
+	myLine.fillColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+	myLine.lineColor = glm::vec4(0.2f, 0.2f, 0.2f, 1.0f);
+	myLine.lineWidth = 5.0f;
+
+	// Optimised Graphics
 	myGraphics.SetOptimisations();		// Cull and depth testing
+	
 }
 
 void updateCamera() {
 
 	// calculate movement for FPS camera
-	GLfloat xoffset = myGraphics.mouseX - myGraphics.cameraLastX;
-	GLfloat yoffset = myGraphics.cameraLastY - myGraphics.mouseY; // Reversed
-	myGraphics.cameraLastX = (GLfloat)myGraphics.mouseX; myGraphics.cameraLastY = (GLfloat)myGraphics.mouseY;
+	GLfloat xoffset = myGraphics.mouseX - myGraphics.cameraLastX;	
+	GLfloat yoffset = myGraphics.cameraLastY - myGraphics.mouseY;	// Reversed mouse movement
+	myGraphics.cameraLastX = (GLfloat)myGraphics.mouseX; 
+	myGraphics.cameraLastY = (GLfloat)myGraphics.mouseY;
 
 	GLfloat sensitivity = 0.05f;
-	xoffset *= sensitivity; yoffset *= sensitivity;
+	xoffset *= sensitivity; 
+	yoffset *= sensitivity;
 
-	myGraphics.cameraYaw += xoffset; myGraphics.cameraPitch += yoffset;
+	myGraphics.cameraYaw += xoffset; 
+	myGraphics.cameraPitch += yoffset;
 
 	// check for pitch out of bounds otherwise screen gets flipped
 	if (myGraphics.cameraPitch > 89.0f) myGraphics.cameraPitch = 89.0f;
 	if (myGraphics.cameraPitch < -89.0f) myGraphics.cameraPitch = -89.0f;
 
+	// Calculating FPS camera movement (See 'Additional Reading: Yaw and Pitch to Vector Calculations' in VISION) 
 	glm::vec3 front;
 	front.x = cos(glm::radians(myGraphics.cameraYaw)) * cos(glm::radians(myGraphics.cameraPitch));
 	front.y = sin(glm::radians(myGraphics.cameraPitch));
@@ -141,12 +168,15 @@ void updateCamera() {
 
 	myGraphics.cameraFront = glm::normalize(front);
 
+	// Update movement using the keys
 	GLfloat cameraSpeed = 1.0f * deltaTime;
 	if (keyStatus[GLFW_KEY_W]) myGraphics.cameraPosition += cameraSpeed * myGraphics.cameraFront;
 	if (keyStatus[GLFW_KEY_S]) myGraphics.cameraPosition -= cameraSpeed * myGraphics.cameraFront;
 	if (keyStatus[GLFW_KEY_A]) myGraphics.cameraPosition -= glm::normalize(glm::cross(myGraphics.cameraFront, myGraphics.cameraUp)) * cameraSpeed;
 	if (keyStatus[GLFW_KEY_D]) myGraphics.cameraPosition += glm::normalize(glm::cross(myGraphics.cameraFront, myGraphics.cameraUp)) * cameraSpeed;
 
+	// IMPORTANT PART
+	// Calculate my view matrix using the lookAt helper function
 	myGraphics.viewMatrix = glm::lookAt(myGraphics.cameraPosition,		// eye
 		myGraphics.cameraPosition + myGraphics.cameraFront,				// centre
 		myGraphics.cameraUp);											// up
@@ -155,24 +185,25 @@ void updateCamera() {
 
 void updateSceneElements() {
 
-	glfwPollEvents();						// poll callbacks
+	glfwPollEvents();								// poll callbacks
 
+	// Calculate frame time/period -- used for all (physics, animation, logic, etc).
 	GLfloat currentTime = (GLfloat)glfwGetTime();	// retrieve timelapse
 	deltaTime = currentTime - lastTime;				// Calculate delta time
 	lastTime = currentTime;							// Save for next frame calculations.
 
-	// Calculate Cube movement ( T * R * S ) http://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/
+	// Do not forget your ( T * R * S ) http://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/
+
+	// Calculate Cube position 
 	glm::mat4 mv_matrix_cube =
-		glm::translate(glm::vec3(2.0f, 0.0f, 0.0f)) *
-		glm::rotate(t, glm::vec3(0.0f, 1.0f, 0.0f)) *
-		glm::rotate(t, glm::vec3(1.0f, 0.0f, 0.0f)) *
+		glm::translate(glm::vec3(2.0f, 0.5f, 0.0f)) *
 		glm::mat4(1.0f);
 	myCube.mv_matrix =  myGraphics.viewMatrix * mv_matrix_cube;
 	myCube.proj_matrix = myGraphics.proj_matrix;
 
 	// calculate Sphere movement
 	glm::mat4 mv_matrix_sphere =
-		glm::translate(glm::vec3(-2.0f, 0.0f, 0.0f)) *
+		glm::translate(glm::vec3(-2.0f, 0.5f, 0.0f)) *
 		glm::rotate(-t, glm::vec3(0.0f, 1.0f, 0.0f)) *
 		glm::rotate(-t, glm::vec3(1.0f, 0.0f, 0.0f)) *
 		glm::mat4(1.0f);
@@ -204,10 +235,29 @@ void updateSceneElements() {
 	arrowZ.mv_matrix = myGraphics.viewMatrix * mv_matrix_z;
 	arrowZ.proj_matrix = myGraphics.proj_matrix;
 
+	// Calculate floor position and resize
+	myFloor.mv_matrix = myGraphics.viewMatrix *
+		glm::translate(glm::vec3(0.0f, 0.0f, 0.0f)) *
+		glm::scale(glm::vec3(1000.0f, 0.001f, 1000.0f)) *
+		glm::mat4(1.0f);
+	myFloor.proj_matrix = myGraphics.proj_matrix;
+
+	// Calculate cylinder
+	myCylinder.mv_matrix = myGraphics.viewMatrix * 
+		glm::translate(glm::vec3(-1.0f, 0.5f, 2.0f)) *
+		glm::mat4(1.0f);
+	myCylinder.proj_matrix = myGraphics.proj_matrix;
+
+	// Calculate Line
+	myLine.mv_matrix = myGraphics.viewMatrix *
+		glm::translate(glm::vec3(1.0f, 0.5f, 2.0f)) *
+		glm::mat4(1.0f);
+	myLine.proj_matrix = myGraphics.proj_matrix;
+
+
 	t += 0.01f; // increment movement variable
 
 
-	
 	if (glfwWindowShouldClose(myGraphics.window) == GL_TRUE) quit = true; // If quit by pressing x on window.
 
 }
@@ -216,15 +266,21 @@ void renderScene() {
 	// Clear viewport - start a new frame.
 	myGraphics.ClearViewport();
 
-	// Draw
+	// Draw objects in screen
+	myFloor.Draw();
 	myCube.Draw();
 	mySphere.Draw();
 
 	arrowX.Draw();
 	arrowY.Draw();
 	arrowZ.Draw();
+
+	myLine.Draw();
+	myCylinder.Draw();
 }
 
+
+// CallBack functions low level functionality.
 void onResizeCallback(GLFWwindow* window, int w, int h) {	// call everytime the window is resized
 	myGraphics.windowWidth = w;
 	myGraphics.windowHeight = h;
@@ -237,6 +293,10 @@ void onKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mo
 	if (action == GLFW_PRESS) keyStatus[key] = true;
 	else if (action == GLFW_RELEASE) keyStatus[key] = false;
 
+	// toggle showing mouse.
+	if (keyStatus[GLFW_KEY_M]) myGraphics.ToggleMouse();
+
+	// If exit key pressed.
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GLFW_TRUE);
 }
@@ -252,13 +312,12 @@ void onMouseMoveCallback(GLFWwindow* window, double x, double y) {
 	myGraphics.mouseX = mouseX;
 	myGraphics.mouseY = mouseY;
 
+	// helper variables for FPS camera
 	if (myGraphics.cameraFirstMouse) {
 		myGraphics.cameraLastX = (GLfloat)myGraphics.mouseX; myGraphics.cameraLastY = (GLfloat)myGraphics.mouseY; myGraphics.cameraFirstMouse = false;
 	}
-
 }
 
 static void onMouseWheelCallback(GLFWwindow* window, double xoffset, double yoffset) {
 	int yoffsetInt = static_cast<int>(yoffset);
-
 }
