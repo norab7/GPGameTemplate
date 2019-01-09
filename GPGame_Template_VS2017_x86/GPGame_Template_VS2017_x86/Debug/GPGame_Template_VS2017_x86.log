@@ -1,0 +1,7 @@
+﻿  Shapes.cpp
+  Graphics.cpp
+  GPGame_Template_VS2017_x86.cpp
+  Generating Code...
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+  GPGame_Template_VS2017_x86.vcxproj -> D:\GoogleDrive\GPGameTemplate-master\GPGameTemplate-master\GPGame_Template_VS2017_x86\Debug\GPGame_Template_VS2017_x86.exe
+  GPGame_Template_VS2017_x86.vcxproj -> D:\GoogleDrive\GPGameTemplate-master\GPGameTemplate-master\GPGame_Template_VS2017_x86\Debug\GPGame_Template_VS2017_x86.pdb (Partial PDB)
