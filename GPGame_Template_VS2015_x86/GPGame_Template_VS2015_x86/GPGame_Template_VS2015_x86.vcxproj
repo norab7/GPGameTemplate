@@ -71,18 +71,18 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)../Libraries\glfw-3.2.1.bin.WIN32\include;$(SolutionDir)../Libraries\glew-2.1.0\include;$(SolutionDir)../Libraries\glm-0.9.9.1\glm;$(SolutionDir)../Libraries/stb_image;$(IncludePath)</IncludePath>
-    <ReferencePath>$(SolutionDir)../Libraries/stb_image\glfw-3.2.1.bin.WIN32\lib-vc2015;$(SolutionDir)../Libraries/stb_image\glew-2.1.0\bin\Release\Win32;$(ReferencePath)</ReferencePath>
-    <LibraryPath>$(SolutionDir)../Libraries/stb_image\glfw-3.2.1.bin.WIN32\lib-vc2015;$(SolutionDir)../Libraries/stb_image\glew-2.1.0\lib\Release\Win32;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)../Libraries\glfw-3.2.1.bin.WIN32\include;$(SolutionDir)../Libraries\glew-2.1.0\include;$(SolutionDir)../Libraries\glm-0.9.9.1\glm;$(SolutionDir)../Libraries\stb_image;$(IncludePath)</IncludePath>
+    <ReferencePath>$(SolutionDir)../Libraries\glfw-3.2.1.bin.WIN32\lib-vc2015;$(SolutionDir)../Libraries\glew-2.1.0\bin\Release\Win32;$(ReferencePath)</ReferencePath>
+    <LibraryPath>$(SolutionDir)../Libraries\glfw-3.2.1.bin.WIN32\lib-vc2015;$(SolutionDir)../Libraries\glew-2.1.0\lib\Release\Win32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)../Libraries\glfw-3.2.1.bin.WIN32\include;$(SolutionDir)../Libraries\glew-2.1.0\include;$(SolutionDir)../Libraries\glm-0.9.9.1\glm;$(SolutionDir)../Libraries/stb_image;$(IncludePath)</IncludePath>
-    <ReferencePath>$(SolutionDir)../Libraries/stb_image\glfw-3.2.1.bin.WIN32\lib-vc2015;$(SolutionDir)../Libraries/stb_image\glew-2.1.0\bin\Release\Win32;$(ReferencePath)</ReferencePath>
-    <LibraryPath>$(SolutionDir)../Libraries/stb_image\glfw-3.2.1.bin.WIN32\lib-vc2015;$(SolutionDir)../Libraries/stb_image\glew-2.1.0\lib\Release\Win32;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)../Libraries\glfw-3.2.1.bin.WIN32\include;$(SolutionDir)../Libraries\glew-2.1.0\include;$(SolutionDir)../Libraries\glm-0.9.9.1\glm;$(SolutionDir)../Libraries\stb_image;$(IncludePath)</IncludePath>
+    <ReferencePath>$(SolutionDir)../Libraries\glfw-3.2.1.bin.WIN32\lib-vc2015;$(SolutionDir)../Libraries\glew-2.1.0\bin\Release\Win32;$(ReferencePath)</ReferencePath>
+    <LibraryPath>$(SolutionDir)../Libraries\glfw-3.2.1.bin.WIN32\lib-vc2015;$(SolutionDir)../Libraries\glew-2.1.0\lib\Release\Win32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -94,7 +94,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)../Libraries\glfw-3.2.1.bin.WIN32\include;$(SolutionDir)../Libraries\glew-2.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -125,7 +125,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)../Libraries\glfw-3.2.1.bin.WIN32\include;$(SolutionDir)../Libraries\glew-2.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
