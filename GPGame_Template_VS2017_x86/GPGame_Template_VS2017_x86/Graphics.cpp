@@ -25,7 +25,8 @@ int Graphics::Init() {
 	glfwSetErrorCallback(ErrorCallbackGLFW);	// Setup a function to catch and display all GLFW errors.
 
 	hintsGLFW();								// Setup glfw with various hints.		
-
+    
+    SetupRender();
 												// Start a window using GLFW
 	string title = "GPGame_Template 2019 - HWU";
 	window = glfwCreateWindow(windowWidth, windowHeight, title.c_str(), NULL, NULL);
@@ -37,6 +38,8 @@ int Graphics::Init() {
 
 	glfwMakeContextCurrent(window);				// making the OpenGL context current
 
+    glfwGetFramebufferSize(window, &windowWidth, &windowHeight); // Fix for retina displays.
+    
 												// Start GLEW (note: always initialise GLEW after creating your window context.)
 	glewExperimental = GL_TRUE;					// hack: catching them all - forcing newest debug callback (glDebugMessageCallback)
 	GLenum errGLEW = glewInit();
@@ -48,7 +51,7 @@ int Graphics::Init() {
 
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);	// Set mouse cursor FPS.
 
-	SetupRender();
+	
 
 	return 0;
 }
@@ -57,6 +60,7 @@ void Graphics::hintsGLFW() {
 	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);			// Create context in debug mode - for debug message callback
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+
 }
 
 void ErrorCallbackGLFW(int error, const char* description) {
