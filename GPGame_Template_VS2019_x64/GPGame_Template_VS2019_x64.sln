@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29324.140
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GPGame_Template_VS2019_x64", "GPGame_Template_VS2019_x64\GPGame_Template_VS2019_x64.vcxproj", "{BDC7A43D-C88B-4C73-A3A6-F4747B90012D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BDC7A43D-C88B-4C73-A3A6-F4747B90012D}.Debug|x64.ActiveCfg = Debug|x64
+		{BDC7A43D-C88B-4C73-A3A6-F4747B90012D}.Debug|x64.Build.0 = Debug|x64
+		{BDC7A43D-C88B-4C73-A3A6-F4747B90012D}.Release|x64.ActiveCfg = Release|x64
+		{BDC7A43D-C88B-4C73-A3A6-F4747B90012D}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A279900C-4CCA-4E46-BED2-22B88B07D8FF}
+	EndGlobalSection
+EndGlobal
