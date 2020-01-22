@@ -6,6 +6,7 @@
 // Added resize screen and keyboard callbacks.
 // Added FPS camera functionality
 // Update 2019/01 updated libraries and created project for VS2017 including directory dependant links to libraries.
+// Update 2020/01 updated libraries for x64 and for VS2020, also adding MAC compiled Libraries.
 
 // Suggestions or extra help please do email me at S.Padilla@hw.ac.uk
 
@@ -42,6 +43,7 @@ bool        quit = false;
 float       deltaTime = 0.0f;    // Keep track of time per frame.
 float       lastTime = 0.0f;    // variable to keep overall time.
 bool        keyStatus[1024];    // Hold key status.
+bool		mouseEnabled = true; // keep track of mouse toggle.
 
 // MAIN GRAPHICS OBJECT
 Graphics    myGraphics;        // Runing all the graphics in this object
@@ -62,17 +64,17 @@ float t = 0.001f;            // Global variable for animation
 
 int main()
 {
-	int errorGraphics = myGraphics.Init();        // Launch window and graphics context
-	if (errorGraphics) return 0;                // Close if something went wrong...
+	int errorGraphics = myGraphics.Init();			// Launch window and graphics context
+	if (errorGraphics) return 0;					// Close if something went wrong...
 
-	startup();                                    // Setup all necessary information for startup (aka. load texture, shaders, models, etc).
+	startup();										// Setup all necessary information for startup (aka. load texture, shaders, models, etc).
 
 
 
 	// MAIN LOOP run until the window is closed
 	while (!quit) {
 
-		// Update the camera tranform based on interactive inputs or by following a predifined path.
+		// Update the camera transform based on interactive inputs or by following a predifined path.
 		updateCamera();
 
 		// Update position, orientations and any other relevant visual state of any dynamic elements in the scene.
@@ -178,10 +180,11 @@ void updateCamera() {
 
 	// IMPORTANT PART
 	// Calculate my view matrix using the lookAt helper function
-	myGraphics.viewMatrix = glm::lookAt(myGraphics.cameraPosition,        // eye
-		myGraphics.cameraPosition + myGraphics.cameraFront,                // centre
-		myGraphics.cameraUp);                                            // up
-
+	if (mouseEnabled) {
+		myGraphics.viewMatrix = glm::lookAt(myGraphics.cameraPosition,			// eye
+			myGraphics.cameraPosition + myGraphics.cameraFront,					// centre
+			myGraphics.cameraUp);												// up
+	}
 }
 
 void updateSceneElements() {
@@ -297,8 +300,10 @@ void onKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mo
 	else if (action == GLFW_RELEASE) keyStatus[key] = false;
 
 	// toggle showing mouse.
-	if (keyStatus[GLFW_KEY_M]) myGraphics.ToggleMouse();
-
+	if (keyStatus[GLFW_KEY_M]) {
+		mouseEnabled = !mouseEnabled;
+		myGraphics.ToggleMouse();
+	}
 	// If exit key pressed.
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GLFW_TRUE);

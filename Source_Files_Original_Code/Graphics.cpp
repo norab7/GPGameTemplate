@@ -38,6 +38,8 @@ int Graphics::Init() {
 
 	glfwMakeContextCurrent(window);				// making the OpenGL context current
 
+	// glfwSwapInterval(1);						// Ony render when synced (V SYNC) NOte: Uncomment for better quality, but lower performance.
+
     glfwGetFramebufferSize(window, &windowWidth, &windowHeight); // Fix for retina displays.
     
 												// Start GLEW (note: always initialise GLEW after creating your window context.)
@@ -74,12 +76,12 @@ void Graphics::endProgram() {
 }
 
 void Graphics::SetupRender() {
-	glfwSwapInterval(1);	// Ony render when synced (V SYNC)
-
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-	glfwWindowHint(GLFW_SAMPLES, 0);
+	glfwWindowHint(GLFW_SAMPLES, 2);
 	glfwWindowHint(GLFW_STEREO, GL_FALSE);
+
+
 }
 
 void Graphics::SetOptimisations() {
@@ -92,7 +94,6 @@ void Graphics::SetOptimisations() {
 	// Enable blending
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	
 	
 }
 
