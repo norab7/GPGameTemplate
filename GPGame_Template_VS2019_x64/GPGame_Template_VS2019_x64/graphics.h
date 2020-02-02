@@ -8,8 +8,6 @@ using namespace std;
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 
-
-
 void ErrorCallbackGLFW(int error, const char* description);
 
 class Graphics {
@@ -23,12 +21,13 @@ public:
 	void endProgram();
 	void SetOptimisations();
 	void ClearViewport();
-	void ToggleMouse();
+	void ToggleMouse(bool& toggle);
 
 
-	GLFWwindow*		window;
-	int				windowWidth = 640;
-	int				windowHeight = 480;
+	GLFWwindow* window;
+	const char* WINDOW_NAME = "Game Engine";
+	int WINDOW_WIDTH = 1920;
+	int WINDOW_HEIGHT = 1080;
 	float           aspect;
 	glm::mat4		viewMatrix = glm::mat4(1.0f); // View Matrix
 	glm::mat4		proj_matrix = glm::mat4(1.0f);
@@ -40,14 +39,19 @@ public:
 	bool			cameraFirstMouse = true;
 	GLfloat			cameraYaw = 90.0f;	// init pointing to inside
 	GLfloat			cameraPitch = 0.0f;	// start centered
-	GLfloat			cameraLastX = (GLfloat)windowWidth / 2.0f;	// start middle screen
-	GLfloat			cameraLastY = (GLfloat)windowHeight / 2.0f;	// start middle screen
+	GLfloat			cameraLastX = (GLfloat) WINDOW_WIDTH / 2.0f;	// start middle screen
+	GLfloat			cameraLastY = (GLfloat) WINDOW_HEIGHT / 2.0f;	// start middle screen
 	glm::vec3		cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 	glm::vec3		cameraPosition = glm::vec3(0.0f, 2.0f, -5.0f);
-	glm::vec3		cameraUp = glm::vec3(0.0f, 1.0f, 0.0f); 
+	glm::vec3		cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
-	int				mouseX = windowWidth/2;
-	int				mouseY = windowHeight/2;
+	int				mouseX = WINDOW_WIDTH / 2;
+	int				mouseY = WINDOW_HEIGHT / 2;
 
+
+
+	/*
+					Archived Code - Can possibly be deleted
+	*/
 	bool			showingMouse = false;	// keep track if showing mouse.
 };

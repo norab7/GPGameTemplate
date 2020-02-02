@@ -1,0 +1,23 @@
+# Blender MTL File: 'tv.blend'
+# Material Count: 2
+
+newmtl Body
+Ns 56.250000
+Ka 0.036364 0.036364 0.036364
+Kd 0.800000 0.800000 0.800000
+Ks 0.609091 0.609091 0.609091
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd D:\\University\\Year4\\ObjectFiles\\textures\\tv.jpg
+
+newmtl Screen
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.227273 0.227273 0.227273
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 3

@@ -13,15 +13,45 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="_GameObjects">
+      <UniqueIdentifier>{39cee6ed-e953-42d2-a93d-2a566e1554e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_PureVirtuals">
+      <UniqueIdentifier>{fb710593-e77b-42f2-a388-5514cf9a035f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_Rendering">
+      <UniqueIdentifier>{2c3016e8-8198-4a25-a764-ff87786ff70f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GPGame_Template_VS2019_x64.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="graphics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="shapes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>_GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_Character.cpp">
+      <Filter>_GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>_GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>_GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>_GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>_GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>_Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -32,5 +62,44 @@
     <ClInclude Include="shapes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>_GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>_GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_Character.h">
+      <Filter>_GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>_GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>_GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>_GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Process_Input.h">
+      <Filter>_PureVirtuals</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>_Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>_Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="shader_fragment.fs">
+      <Filter>_Rendering</Filter>
+    </None>
+    <None Include="shader_vertex.vs">
+      <Filter>_Rendering</Filter>
+    </None>
   </ItemGroup>
 </Project>

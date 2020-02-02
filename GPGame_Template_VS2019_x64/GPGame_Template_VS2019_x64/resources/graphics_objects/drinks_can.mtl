@@ -1,0 +1,12 @@
+# Blender MTL File: 'drinks_can.blend'
+# Material Count: 1
+
+newmtl Material.002
+Ns 225.000000
+Ka 0.745455 0.745455 0.745455
+Kd 0.800000 0.800000 0.800000
+Ks 0.672727 0.672727 0.672727
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 3

@@ -1,2 +1,9 @@
-﻿  GPGame_Template_VS2019_x64.cpp
-  GPGame_Template_VS2019_x64.vcxproj -> D:\GPGameTemplate-master\GPGame_Template_VS2019_x64\x64\Debug\GPGame_Template_VS2019_x64.exe
+﻿  Main.cpp
+C:\_University\_Year4\_Semester2\F20GP_GamesProgramming\GPGameTemplate\GPGame_Template_VS2019_x64\GPGame_Template_VS2019_x64\Player_Character.h(8,28): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\_University\_Year4\_Semester2\F20GP_GamesProgramming\GPGameTemplate\GPGame_Template_VS2019_x64\GPGame_Template_VS2019_x64\Main.cpp(120,11): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\_University\_Year4\_Semester2\F20GP_GamesProgramming\GPGameTemplate\GPGame_Template_VS2019_x64\GPGame_Template_VS2019_x64\Main.cpp(121,11): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\_University\_Year4\_Semester2\F20GP_GamesProgramming\GPGameTemplate\GPGame_Template_VS2019_x64\GPGame_Template_VS2019_x64\Main.cpp(125,10): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\_University\_Year4\_Semester2\F20GP_GamesProgramming\GPGameTemplate\GPGame_Template_VS2019_x64\GPGame_Template_VS2019_x64\Main.cpp(126,10): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+  graphics.cpp
+  Generating Code...
+  GPGame_Template_VS2019_x64.vcxproj -> C:\_University\_Year4\_Semester2\F20GP_GamesProgramming\GPGameTemplate\GPGame_Template_VS2019_x64\x64\Debug\GPGame_Template_VS2019_x64.exe

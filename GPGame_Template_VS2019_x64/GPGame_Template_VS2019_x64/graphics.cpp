@@ -1,11 +1,3 @@
-#include <iostream>
-#include <vector>
-using namespace std;
-
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-#include <glm/glm.hpp>
-
 #include "Graphics.h"
 
 Graphics::Graphics() {
@@ -28,8 +20,7 @@ int Graphics::Init() {
     
     SetupRender();
 												// Start a window using GLFW
-	string title = "GPGame_Template 2019 - HWU";
-	window = glfwCreateWindow(windowWidth, windowHeight, title.c_str(), NULL, NULL);
+	window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_NAME, NULL, NULL);
 	if (!window) {								// Window or OpenGL context creation failed
 		cout << "Could not initialise GLFW...";
 		endProgram();
@@ -39,8 +30,7 @@ int Graphics::Init() {
 	glfwMakeContextCurrent(window);				// making the OpenGL context current
 
 	// glfwSwapInterval(1);						// Ony render when synced (V SYNC) NOte: Uncomment for better quality, but lower performance.
-
-    glfwGetFramebufferSize(window, &windowWidth, &windowHeight); // Fix for retina displays.
+    glfwGetFramebufferSize(window, &WINDOW_WIDTH, &WINDOW_HEIGHT); // Fix for retina displays.
     
 												// Start GLEW (note: always initialise GLEW after creating your window context.)
 	glewExperimental = GL_TRUE;					// hack: catching them all - forcing newest debug callback (glDebugMessageCallback)
@@ -98,22 +88,20 @@ void Graphics::SetOptimisations() {
 }
 
 void Graphics::ClearViewport() {
-	glViewport(0, 0, windowWidth, windowHeight);
+	glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 	glClearBufferfv(GL_COLOR, 0, &backgroundColor[0]);
 	const GLfloat one = 1.0f;
 	glClearBufferfv(GL_DEPTH, 0, &one);
 }
 
-void Graphics::ToggleMouse() {
-	if (showingMouse) {
-		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);	// Set mouse cursor FPS.
-		cout << "Hidding Mouse..." << "\n";
+void Graphics::ToggleMouse(bool& toggle) {
+	if (toggle) {
+		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	}
 	else {
-		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);		// Set mouse cursor normal
-		cout << "Showing Mouse..." << "\n";
+		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 	}
 
-	showingMouse = !showingMouse; // toggle
+	toggle = !toggle;
 }
 
