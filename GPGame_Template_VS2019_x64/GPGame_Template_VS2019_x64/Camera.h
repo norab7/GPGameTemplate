@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include "Entity.h"
-#include "Process_Input.h"
+#include "I_Input.h"
 
 namespace _Camera {
 	class Camera : public _Entity::Entity {

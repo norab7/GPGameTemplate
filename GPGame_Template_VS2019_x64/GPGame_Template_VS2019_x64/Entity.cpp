@@ -42,15 +42,15 @@ glm::mat4 Entity::get_matrix() {
 	return this->matrix;
 }
 
-glm::vec3 Entity::get_position() {
-	return position;
+const glm::vec3 Entity::get_position() const {
+	return glm::vec3(matrix[3][0], matrix[3][1], matrix[3][2]);
 }
 
 void Entity::set_position(glm::vec3 pos) {
 	this->position = pos;
-	matrix[0][3] = position.x;
-	matrix[1][3] = position.y;
-	matrix[2][3] = position.z;
+	matrix[3][0] = position.x;
+	matrix[3][1] = position.y;
+	matrix[3][2] = position.z;
 }
 
 void Entity::transform(glm::mat4 trans) {
@@ -59,7 +59,7 @@ void Entity::transform(glm::mat4 trans) {
 }
 
 void Entity::translate(glm::vec3 trans) {
-	position *= trans;
+	matrix = glm::translate(matrix, trans);
 	for(Entity e : children) { e.translate(trans); }
 }
 

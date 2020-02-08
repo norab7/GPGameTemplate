@@ -9,14 +9,14 @@ Camera::Camera(glm::vec3 pos) : Entity::Entity("Camera", pos) {
 
 void Camera::set_target(glm::vec3 target, glm::vec3 world_up) {
 	this->target = target;
-	this->direction = glm::normalize(this->position - this->target);
+	this->direction = glm::normalize(this->get_position() -this->target);
 	this->right = glm::normalize(glm::cross(world_up, direction));
 	this->up = glm::normalize(glm::cross(direction, right));
 	this->front = glm::normalize(-direction);
 }
 
 glm::mat4& Camera::look_at() {
-	view = glm::lookAt(position, position + front, up);
+	view = glm::lookAt(get_position(), get_position()+ front, up);
 	return view;
 }
 

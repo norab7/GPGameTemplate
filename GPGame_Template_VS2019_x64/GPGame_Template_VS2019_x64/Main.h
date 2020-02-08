@@ -45,6 +45,7 @@ float time_step = 0.001f;            // Global variable for animation
 #include "Shader.h"
 #include "Player_Character.h"
 #include "GameObject.h"
+#include "AABB_Tree.h"
 
 using namespace _GameObject;
 using namespace _Player_Character;
@@ -55,7 +56,14 @@ int lastY = 0;
 
 Shader* shader;
 Player_Character* player;
-std::vector<GameObject> objects;
+// std::vector<GameObject> objects;
+
+// Objects and Physics
+bool collision = false;
+std::vector<std::shared_ptr<GameObject>> game_objects;
+AABB_Tree boundary_volume(10);
+std::map<std::shared_ptr<I_AABB>, std::shared_ptr<GameObject>> object_map;
+
 
 
 /*

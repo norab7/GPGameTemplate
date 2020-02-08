@@ -13,6 +13,39 @@ int main() {
 		// Process Camera
 		updateCamera();
 
+
+
+		std::vector<std::shared_ptr<I_AABB>> collisions = boundary_volume.check_overlaps(game_objects[0]);
+		if(!collisions.empty()) {
+			collision = true;
+
+			for(std::shared_ptr<I_AABB> collide : collisions) {
+				if(object_map[collide] == game_objects[1]) {
+					std::wcout << "Collision: " << (*object_map[collide]).get_id() << std::endl;
+				}
+			}
+		}
+
+		// Update Scene
+		for(unsigned i = 0; i < game_objects.size(); i++) {
+			if((*game_objects[i]).get_id() == "left") {
+				if(collision) {
+					(*game_objects[i]).translate(glm::vec3(-0.01, 0, 0));
+				} else {
+					(*game_objects[i]).translate(glm::vec3(0.01, 0, 0));
+				}
+
+
+				if((*game_objects[i]).get_position().x < -2) { collision = false; }
+			}
+		}
+
+
+
+
+
+
+
 		updateSceneElements();
 
 		// Render a still frame into an off-screen frame buffer known as the backbuffer.
@@ -50,7 +83,18 @@ void startup() {
 	player->set_position(glm::vec3(0, 0, 10));
 
 	// Initial Game Objects
-	objects.push_back(*new GameObject("tv", "resources/graphics_objects/tv.obj"));
+	srand(glfwGetTime());
+	GameObject left = *new GameObject("left", "resources/graphics_objects/lamp_standing.obj", glm::vec3(-5, 0, 0));
+	GameObject right = *new GameObject("right", "resources/graphics_objects/lamp_standing.obj", glm::vec3(1, 0, 0));
+
+
+	game_objects.push_back(std::make_shared<GameObject>(left));
+	game_objects.push_back(std::make_shared<GameObject>(right));
+
+	for(unsigned i = 0; i < game_objects.size(); i++) {
+		boundary_volume.insert(game_objects[i]);
+		object_map[game_objects[i]] = game_objects[i];
+	}
 
 	// Cull and depth testing
 	myGraphics.SetOptimisations();
@@ -88,9 +132,14 @@ void updateSceneElements() {
 void renderScene() {
 	myGraphics.ClearViewport();
 
-	for(GameObject g : objects) {
-		shader->setMat4("model", g.get_matrix());
-		g.Draw(*shader);
+	for(unsigned i = 0; i < game_objects.size(); i++) {
+
+		//g.scale(glm::vec3(0.5, 0.5, 0.5));
+		//g.rotate((int) (currentFrame * 100), glm::vec3(0, 1, 0));
+		shader->setMat4("model", (*game_objects[i]).get_matrix());
+
+		// g.randomize_mesh_vertices();
+		(*game_objects[i]).Draw(*shader, true);
 	}
 }
 

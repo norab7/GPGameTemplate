@@ -22,6 +22,9 @@
     <Filter Include="_Rendering">
       <UniqueIdentifier>{2c3016e8-8198-4a25-a764-ff87786ff70f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AABB">
+      <UniqueIdentifier>{bfa76a0a-333c-4e19-b492-b8932f45fb7f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="graphics.cpp">
@@ -54,6 +57,12 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AABB_Tree.cpp">
+      <Filter>AABB</Filter>
+    </ClCompile>
+    <ClCompile Include="AABB.cpp">
+      <Filter>AABB</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="graphics.h">
@@ -80,9 +89,6 @@
     <ClInclude Include="GameObject.h">
       <Filter>_GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="Process_Input.h">
-      <Filter>_PureVirtuals</Filter>
-    </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>_Rendering</Filter>
     </ClInclude>
@@ -91,6 +97,18 @@
     </ClInclude>
     <ClInclude Include="Main.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AABB_Tree.h">
+      <Filter>AABB</Filter>
+    </ClInclude>
+    <ClInclude Include="AABB.h">
+      <Filter>AABB</Filter>
+    </ClInclude>
+    <ClInclude Include="I_Input.h">
+      <Filter>_PureVirtuals</Filter>
+    </ClInclude>
+    <ClInclude Include="I_AABB.h">
+      <Filter>_PureVirtuals</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

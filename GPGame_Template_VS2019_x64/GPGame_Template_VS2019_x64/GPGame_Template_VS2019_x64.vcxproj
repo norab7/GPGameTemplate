@@ -166,6 +166,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AABB.cpp" />
+    <ClCompile Include="AABB_Tree.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -178,15 +180,18 @@
     <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AABB.h" />
+    <ClInclude Include="AABB_Tree.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="graphics.h" />
+    <ClInclude Include="I_AABB.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Player_Character.h" />
-    <ClInclude Include="Process_Input.h" />
+    <ClInclude Include="I_Input.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="shapes.h" />
     <ClInclude Include="Texture.h" />

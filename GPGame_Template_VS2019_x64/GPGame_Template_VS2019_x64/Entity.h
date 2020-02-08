@@ -8,10 +8,10 @@ namespace _Entity {
 	class Entity {
 		const char* id;
 		bool child = false;
+		glm::vec3 position;
 
 	protected:
 		glm::mat4 matrix;
-		glm::vec3 position;
 
 		std::vector<Entity> children;
 	public:
@@ -23,7 +23,7 @@ namespace _Entity {
 		void remove_child(Entity child, bool deep = false);
 		void remove_children();
 
-		glm::vec3 get_position();
+		const glm::vec3 get_position() const;
 
 		glm::mat4 get_matrix();
 		void set_position(glm::vec3 pos);

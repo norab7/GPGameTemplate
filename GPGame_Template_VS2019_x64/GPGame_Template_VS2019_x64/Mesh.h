@@ -29,9 +29,12 @@ namespace _Mesh {
 		std::vector<Vertex> vertices;
 		std::vector<unsigned int> indices;
 		std::vector<Texture> textures;
+		glm::vec3 centre;
 
 		Mesh(std::vector<Vertex> &vertices, std::vector<unsigned int>& indices, std::vector<Texture>& textures);
-		void Draw(Shader& shader);
+		Mesh(std::vector<Vertex>& vertices, std::vector<unsigned int>& indices, std::vector<Texture>& textures, glm::vec3 average_vertices);
+
+		void Draw(Shader& shader, bool show_bounds = false);
 
 		void randomize_vertices();
 

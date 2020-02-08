@@ -1,9 +1,9 @@
 #pragma once
 #include "Camera.h"
-#include "Process_Input.h"
+#include "I_Input.h"
 
 namespace _Player_Character {
-	class Player_Character : public _Camera::Camera, _Process_Input::Process_Input {
+	class Player_Character : public _Camera::Camera, _I_Input::I_Input {
 		bool firstMouse = true;
 		float sensitivity = 0.025;
 	protected:

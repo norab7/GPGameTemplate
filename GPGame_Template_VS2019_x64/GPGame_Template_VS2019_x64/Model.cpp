@@ -19,10 +19,13 @@ void Model::load(const std::string& path) {
 	}
 	dir = path.substr(0, path.find_last_of('/'));
 	process_node(scene->mRootNode, scene);
+	meshes.insert(meshes.begin(), process_bounds_mesh());
 }
 
-void Model::Draw(Shader& shader) {
-	for(unsigned int i = 0; i < meshes.size(); i++) {
+void Model::Draw(Shader& shader, bool show_bounds) {
+	if(show_bounds) { meshes[0].Draw(shader, true); }
+
+	for(unsigned int i = 1; i < meshes.size(); i++) {
 		meshes[i].Draw(shader);
 	}
 }
@@ -45,6 +48,7 @@ Mesh Model::process_mesh(aiMesh* mesh, const aiScene* scene) {
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
 	std::vector<Texture> textures;
+	glm::vec4 average(0);
 
 	for(unsigned int i = 0; i < mesh->mNumVertices; i++) {
 		Vertex vertex;
@@ -54,6 +58,11 @@ Mesh Model::process_mesh(aiMesh* mesh, const aiScene* scene) {
 		vertex.Normal = glm::vec3(mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z);
 		vertex.TexCoords = (mesh->mTextureCoords[0]) ? glm::vec2(mesh->mTextureCoords[0][i].x, mesh->mTextureCoords[0][i].y) : glm::vec2(0, 0);
 
+		// Check for bounding area
+		check_min_max(vertex.Position);
+		average = glm::vec4(vertex.Position + vertex.Position, ++average[3]);
+
+		// Push the vertex to the vector list
 		vertices.push_back(vertex);
 	}
 
@@ -77,7 +86,58 @@ Mesh Model::process_mesh(aiMesh* mesh, const aiScene* scene) {
 		std::vector<Texture> specular_map = load_material_textures(material, aiTextureType_SPECULAR, "texture_specular");
 		textures.insert(textures.end(), specular_map.begin(), specular_map.end());
 	}
-	return Mesh(vertices, indices, textures);
+
+	// Get the centre average of the shape
+	average = glm::vec4(average.x / average.w, average.y / average.w, average.z / average.w, average.w);
+
+	return Mesh(vertices, indices, textures, average);
+}
+
+void Model::check_min_max(glm::vec3 vertex) {
+	// Set min bounds
+	if(bounds_min.x > vertex.x) { bounds_min.x = vertex.x; }
+	if(bounds_min.y > vertex.y) { bounds_min.y = vertex.y; }
+	if(bounds_min.z > vertex.z) { bounds_min.z = vertex.z; }
+
+	// Set max bounds
+	if(bounds_max.x < vertex.x) { bounds_max.x = vertex.x; }
+	if(bounds_max.y < vertex.y) { bounds_max.y = vertex.y; }
+	if(bounds_max.z < vertex.z) { bounds_max.z = vertex.z; }
+
+}
+
+Mesh Model::process_bounds_mesh() {
+	std::vector<glm::vec3> vertices;
+	//std::vector<unsigned int> indices {1,2,3, 1,2,4, 1,3,4,   7,2,4, 7,2,5, 7,4,5,	6,3,4, 6,3,5, 6,4,5,	8,2,3, 8,2,5, 8,3,5}; // Manual Calculation based on positions of vertices
+	std::vector<unsigned int> indices {7,2,4,7,1,2,7,1,4,	6,1,3,6,1,4,6,3,4,	5,2,4,5,4,3,5,3,2,	0,1,3,0,3,2,0,2,1}; // Manual Calculation based on positions of vertices
+
+	std::vector<Texture> textures;
+	glm::vec4 average(0);
+
+	// Get top of bounding box																					// Indices for faces
+	vertices.push_back(bounds_max);																				// 1
+	vertices.push_back(glm::vec3(bounds_max.x - (bounds_max.x - bounds_min.x), bounds_max.y, bounds_max.z));	// 2
+	vertices.push_back(glm::vec3(bounds_max.x, bounds_max.y - (bounds_max.y - bounds_min.y), bounds_max.z));	// 3
+	vertices.push_back(glm::vec3(bounds_max.x, bounds_max.y, bounds_max.z - (bounds_max.z - bounds_min.z)));	// 4
+
+	// Get bottom of bounding box
+	vertices.push_back(bounds_min);																				// 5
+	vertices.push_back(glm::vec3(bounds_min.x + (bounds_max.x - bounds_min.x), bounds_min.y, bounds_min.z));	// 6
+	vertices.push_back(glm::vec3(bounds_min.x, bounds_min.y + (bounds_max.y - bounds_min.y), bounds_min.z));	// 7
+	vertices.push_back(glm::vec3(bounds_min.x, bounds_min.y, bounds_min.z + (bounds_max.z - bounds_min.z)));	// 8
+
+	std::vector<Vertex> vertex_vector;
+	for(unsigned int i = 0; i < vertices.size(); i++) {
+		Vertex vertex;
+		vertex.Position = vertices[i];
+		vertex.Normal = vertices[i];
+
+		average = glm::vec4(vertex.Position + vertex.Position, ++average[3]);
+		vertex_vector.push_back(vertex);
+	}
+
+	average = glm::vec4(average.x / average.w, average.y / average.w, average.z / average.w, average.w);
+	return Mesh(vertex_vector, indices, textures, average);
 }
 
 std::vector<Texture> Model::load_material_textures(aiMaterial* mat, aiTextureType type, std::string name) {

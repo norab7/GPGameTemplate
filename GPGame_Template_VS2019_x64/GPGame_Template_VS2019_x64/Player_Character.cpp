@@ -10,12 +10,12 @@ void Player_Character::process_keyboard(bool* KEYS) {
 	float deltaSpeed = speed; //  *delta;
 	if(KEYS[GLFW_KEY_LEFT_SHIFT]) { deltaSpeed *= 2; }
 	if(KEYS[GLFW_KEY_LEFT_ALT]) { deltaSpeed /= 2; }
-	if(KEYS[GLFW_KEY_W]) { position += front * deltaSpeed; }
-	if(KEYS[GLFW_KEY_S]) { position -= front * deltaSpeed; }
-	if(KEYS[GLFW_KEY_A]) { position -= right * deltaSpeed; }
-	if(KEYS[GLFW_KEY_D]) { position += right * deltaSpeed; }
-	if(KEYS[GLFW_KEY_SPACE]) { position += up * deltaSpeed; }
-	if(KEYS[GLFW_KEY_LEFT_CONTROL]) { position -= up * deltaSpeed; }
+	if(KEYS[GLFW_KEY_W]) { set_position(get_position() + front * deltaSpeed); }
+	if(KEYS[GLFW_KEY_S]) { set_position(get_position() - front * deltaSpeed); }
+	if(KEYS[GLFW_KEY_A]) { set_position(get_position() - right * deltaSpeed); }
+	if(KEYS[GLFW_KEY_D]) { set_position(get_position() + right * deltaSpeed); }
+	if(KEYS[GLFW_KEY_SPACE]) { set_position(get_position() + up * deltaSpeed); }
+	if(KEYS[GLFW_KEY_LEFT_CONTROL]) { set_position(get_position() - up * deltaSpeed); }
 }
 
 void Player_Character::process_mouse_movement(double xpos, double ypos) {
